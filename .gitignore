@@ -4,4 +4,4 @@ node_modules
 
 *.pem
 *.oci
-.env
+*/.env
