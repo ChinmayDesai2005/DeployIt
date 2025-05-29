@@ -1,0 +1,152 @@
+.project-wrapper {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
+  min-height: 90vh;
+  width: 100%;
+  background: #242424;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='50' width='50'%3E%3Cdefs%3E%3Cpattern id='doodad' width='50' height='50' viewBox='0 0 40 40' patternUnits='userSpaceOnUse' patternTransform=''%3E%3Crect width='100%25' height='100%25' fill='rgba(36, 36, 36,1)'/%3E%3Ccircle cx='40' cy='20' r='0.25' fill='rgba(26, 32, 44,1)'/%3E%3Ccircle cx='0' cy='20' r='1' fill='rgba(145, 123, 45,1)'/%3E%3Ccircle cx='40' cy='20' r='1' fill='rgba(145, 123, 45,1)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect fill='url(%23doodad)' height='200%25' width='200%25'/%3E%3C/svg%3E ");
+  color: white;
+  font-family: Outfit, sans-serif;
+  gap: 3rem;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  padding-top: 1rem;
+  font-family: "Press Start 2P", Outfit, sans-serif;
+  color: white;
+  text-shadow: 3px 3px #dfbd45;
+}
+
+.form-div {
+  margin-top: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background: #242424;
+  height: 50vh;
+  width: 50vw;
+  box-shadow: 10px 10px #ecc94b;
+  border: 2px solid #ecc94b;
+}
+
+.input-wrapper {
+  width: 80%;
+  height: 80px;
+}
+
+.form-input {
+  padding-left: 0.5rem;
+  margin-top: 0.5rem;
+  width: 96%;
+  height: 40%;
+  background: #242424;
+  color: white;
+  border: 2px solid #ecc94b;
+  /* border-radius: 4px; */
+  font-size: 1rem;
+  outline: none;
+  font-family: "Fira Code", sans-serif;
+}
+
+.form-input:focus {
+  box-shadow: 4px 4px #ecc94b;
+}
+
+.form-submit {
+  height: 45px;
+  width: 25%;
+  font-size: 1rem;
+  font-weight: 800;
+  font-family: "Press Start 2P", Outfit, sans-serif;
+  background: #ecc94b;
+  color: #242424;
+  /* box-shadow: 2px 2px #ecc94b; */
+  box-shadow: none;
+  /* border: 2px solid #242424; */
+  border: none;
+  outline: none;
+}
+
+.form-submit:hover {
+  background: #242424;
+  box-shadow: 3px 3px #ecc94b;
+  color: #ecc94b;
+  border: 2px solid #ecc94b;
+}
+
+.form-submit:active {
+  background: #ecc94b;
+  box-shadow: 3px 3px #ecc94b;
+  color: #242424;
+  border: 2px solid #ecc94b;
+  transform: scale(0.98);
+}
+
+.response-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background: #242424;
+  min-height: 50vh;
+  width: 50vw;
+  box-shadow: 10px 10px #ecc94b;
+  border: 2px solid #ecc94b;
+  font-family: Outfit, sans-serif;
+  background: #242424;
+  color: #ecc94b !important;
+  margin-bottom: 25vh;
+}
+
+.response-wrapper .title {
+  padding-top: 2rem;
+}
+
+.info-wrapper {
+  flex: 1;
+  width: 75%;
+  /* background-color: white; */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding-block: 1rem;
+}
+
+.info-section {
+  padding-bottom: 0.5rem;
+}
+.info-title {
+  font-family: Outfit, sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.info-content {
+  color: black;
+  font-weight: 500;
+  background-color: #ecc94b;
+  width: fit-content;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-family: Fira Code, sans-serif;
+}
+
+.response-link {
+  color: #242424;
+}
+
+.note-wrapper {
+  padding-top: 1rem;
+}
