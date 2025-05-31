@@ -22,14 +22,14 @@
 }
 
 .form-div {
-  margin-top: 15vh;
+  margin-top: 9.5vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   background: #242424;
-  height: 50vh;
+  height: 70vh;
   width: 50vw;
   box-shadow: 10px 10px #ecc94b;
   border: 2px solid #ecc94b;
@@ -38,6 +38,37 @@
 .input-wrapper {
   width: 80%;
   height: 80px;
+}
+
+.input-loader-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 75%;
+  padding: 0;
+  margin: 0;
+}
+
+.input-loader-wrapper input {
+  margin-top: 0;
+  width: 100%;
+  height: 54%;
+}
+
+.input-loader-wrapper svg {
+  aspect-ratio: 1 !important;
+  width: 35px !important;
+  min-height: 25px;
+  height: 35px !important;
+  padding-inline: 0.5rem;
+}
+
+.loader {
+  animation-name: spin;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
 .form-input {
@@ -149,4 +180,13 @@
 
 .note-wrapper {
   padding-top: 1rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

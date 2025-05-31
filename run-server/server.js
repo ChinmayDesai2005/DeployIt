@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 // const { exec } = require("child_process");
 const crypto = require("crypto");
+const mongoose = require("mongoose");
 // const util = require("util");
 const { spawn } = require("child_process");
 const { generateSlug } = require("random-word-slugs");
@@ -9,14 +10,39 @@ const { ECSClient, RunTaskCommand } = require("@aws-sdk/client-ecs");
 
 // const execPromise = util.promisify(exec);
 const app = express();
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 const PORT = 9000;
 const ACCESSKEYID = process.env.AWS_ACCESS_ID;
 const SECRETACCESSKEY = process.env.AWS_SECRET_ID;
 const AWS_ECS_CLUSTER = process.env.AWS_ECS_CLUSTER;
 const AWS_ECS_TASK = process.env.AWS_ECS_TASK;
+const MONGO_URI = process.env.MONGO_URI;
+console.log(process.env.MONGO_URI);
+
+mongoose
+  .connect(MONGO_URI)
+  .then(() => console.log("MongoDB Connected!"))
+  .catch((error) => console.error(error));
+
+const projectSchema = new mongoose.Schema({
+  gitURL: {
+    type: String,
+    required: true,
+  },
+  customDir: {
+    type: String,
+    required: true,
+  },
+  projectSlug: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+});
+
+const Project = mongoose.model("project", projectSchema);
 
 const ecsClient = new ECSClient({
   region: "ap-south-1",
@@ -33,6 +59,23 @@ const config = {
 
 app.use(express.json());
 
+app.post("/checkURL", async (req, res) => {
+  const { projectSlug } = req.body;
+  console.log(projectSlug);
+  if (!projectSlug) {
+    return res.json({ ERROR: "Missing required Fields!" });
+  }
+
+  const result = await Project.find({ projectSlug: projectSlug.toLowerCase() });
+
+  if (result.length > 0) {
+    console.log(result);
+    return res.status(200).json({ code: "409", status: "Already Exists" });
+  } else {
+    return res.status(200).json({ code: "200", status: "Available" });
+  }
+});
+
 app.post("/deploy", async (req, res) => {
   const { gitURL, slug, customDir } = req.body;
   const projectSlug = slug ? slug : generateSlug();
@@ -40,6 +83,15 @@ app.post("/deploy", async (req, res) => {
   if (!gitURL) {
     return res.json({ ERROR: "Missing required Fields!" });
   }
+
+  const result = await Project.insertOne({
+    customDir,
+    gitURL,
+    projectSlug: projectSlug,
+  });
+
+  console.log("New Project created in DB", result);
+
   // Spin the container
   const command = new RunTaskCommand({
     cluster: config.CLUSTER,
@@ -81,6 +133,8 @@ app.post("/deploy", async (req, res) => {
     },
   });
 });
+
+app.get("/checkURL");
 
 app.listen(PORT, () => {
   console.log(`Deploy server listening on http://localhost:${PORT}`);
