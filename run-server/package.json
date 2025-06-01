@@ -5,6 +5,7 @@
     "ecs": "^0.23.0",
     "express": "^5.1.0",
     "express.js": "^1.0.0",
+    "mongoose": "^8.15.1",
     "random-word-slugs": "^0.1.7"
   }
 }

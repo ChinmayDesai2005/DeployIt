@@ -2,10 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import "./NewProject.css";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { ImSpinner4, ImCross, ImMinus, ImCheckmark } from "react-icons/im";
 
 const NewProject = () => {
   const [gitUrl, setGitUrl] = useState("");
   const [customDir, setCustomDir] = useState("");
+  const [customURL, setCustomURL] = useState("");
+  const [URLCheck, setURLCheck] = useState("none");
   const [response, setResponse] = useState();
 
   const responseRef = useRef(null);
@@ -20,13 +23,50 @@ const NewProject = () => {
     setCustomDir(e.target.value);
   };
 
+  const handleURLChange = async (e) => {
+    setCustomURL(e.target.value);
+    if (e.target.value === "") {
+      setURLCheck("none");
+    } else {
+      setURLCheck("loading");
+      try {
+        const response = await axios.post(
+          // "https://chinmaydesai.site/deploy-it-api/checkURL",
+          "http://localhost:9000/checkURL",
+          {
+            projectSlug: e.target.value,
+          }
+        );
+        console.log(response);
+        if (response.data.code === "409") {
+          setURLCheck("false");
+        } else if (response.data.code === "200") {
+          setURLCheck("true");
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error(error?.response?.data?.ERROR || "Error sending request");
+      }
+    }
+  };
+
   const handleDeploy = async () => {
+    if ((!customDir, !gitUrl, !customDir)) {
+      toast.error("Fill in all fields!");
+      return;
+    }
+    if (URLCheck === "false") {
+      toast.error("URL unavailable, please enter something else.");
+      return;
+    }
     try {
       const response = await axios.post(
-        "https://chinmaydesai.site/deploy-it-api/deploy",
+        // "https://chinmaydesai.site/deploy-it-api/deploy",
+        "http://localhost:9000/deploy",
         {
           gitURL: gitUrl,
           customDir,
+          slug: customURL,
         }
       );
       console.log(response);
@@ -54,7 +94,7 @@ const NewProject = () => {
     <>
       <div className="not-found-footer">
         <div className="deployit-title" onClick={() => navigate("/")}>
-          D
+          DeployIt
         </div>
       </div>
       <div className="project-wrapper">
@@ -80,6 +120,24 @@ const NewProject = () => {
               className="form-input"
               onChange={(e) => handleDirChange(e)}
             />
+          </div>
+          <div className="input-wrapper custom-url">
+            <label htmlFor="customURL">Custom URL (Optional)</label>
+            <div className="input-loader-wrapper">
+              <input
+                placeholder="something-unique"
+                name="customURL"
+                type="text"
+                className="form-input"
+                onChange={(e) => handleURLChange(e)}
+              />
+              {URLCheck === "none" && <ImMinus color="#ecc94b" />}
+              {URLCheck === "true" && <ImCheckmark color="#ecc94b" />}
+              {URLCheck === "false" && <ImCross color="#FF7F7F" />}
+              {URLCheck === "loading" && (
+                <ImSpinner4 className="loader" color="#ecc94b" />
+              )}
+            </div>
           </div>
           <button type="submit" className="form-submit" onClick={handleDeploy}>
             Deploy
