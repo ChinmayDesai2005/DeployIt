@@ -3,7 +3,7 @@
 
 Try **DeployIt** out @ [deployit.chinmaydesai.site](https://deployit.chinmaydesai.site)
 
-DeployIt is a frontend deployment service builds your projects, stores them on the cloud, and deploys them on a publically accessible domain. Currently support vite-based projects.
+DeployIt is a frontend deployment service builds your projects, stores them on the cloud, and deploys them on a publicly accessible domain. Currently support vite-based projects.
 
 **Tech Stack**
 - Frontend : React.js
