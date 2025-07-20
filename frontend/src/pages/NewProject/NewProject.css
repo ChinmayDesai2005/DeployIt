@@ -3,7 +3,7 @@
   /* justify-content: center; */
   align-items: center;
   flex-direction: column;
-  min-height: 90vh;
+  min-height: 90dvh;
   width: 100%;
   background: #242424;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='50' width='50'%3E%3Cdefs%3E%3Cpattern id='doodad' width='50' height='50' viewBox='0 0 40 40' patternUnits='userSpaceOnUse' patternTransform=''%3E%3Crect width='100%25' height='100%25' fill='rgba(36, 36, 36,1)'/%3E%3Ccircle cx='40' cy='20' r='0.25' fill='rgba(26, 32, 44,1)'/%3E%3Ccircle cx='0' cy='20' r='1' fill='rgba(145, 123, 45,1)'/%3E%3Ccircle cx='40' cy='20' r='1' fill='rgba(145, 123, 45,1)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect fill='url(%23doodad)' height='200%25' width='200%25'/%3E%3C/svg%3E ");
@@ -15,7 +15,7 @@
 .title {
   font-size: 1.6rem;
   font-weight: 800;
-  padding-top: 1rem;
+  margin-top: 1rem;
   font-family: "Press Start 2P", Outfit, sans-serif;
   color: white;
   text-shadow: 3px 3px #dfbd45;
@@ -29,7 +29,8 @@
   align-items: center;
   gap: 1rem;
   background: #242424;
-  height: 70vh;
+  height: 70dvh;
+  min-height: 500px;
   width: 50vw;
   box-shadow: 10px 10px #ecc94b;
   border: 2px solid #ecc94b;
@@ -38,6 +39,18 @@
 .input-wrapper {
   width: 80%;
   height: 80px;
+}
+
+.double-input-wrapper {
+  width: 80%;
+  display: flex;
+  /* flex-wrap: wrap; */
+  gap: 3%;
+  align-items: center;
+}
+
+.double-input-wrapper > .input-wrapper {
+  width: 47%;
 }
 
 .input-loader-wrapper {
@@ -51,17 +64,17 @@
 }
 
 .input-loader-wrapper input {
-  margin-top: 0;
-  width: 100%;
   height: 54%;
+  max-width: 100%;
 }
 
 .input-loader-wrapper svg {
+  margin-top: 0.5rem;
   aspect-ratio: 1 !important;
   width: 35px !important;
   min-height: 25px;
   height: 35px !important;
-  padding-inline: 0.5rem;
+  padding-inline: 0.6rem;
 }
 
 .loader {
@@ -74,7 +87,7 @@
 .form-input {
   padding-left: 0.5rem;
   margin-top: 0.5rem;
-  width: 96%;
+  width: 95%;
   height: 40%;
   background: #242424;
   color: white;
@@ -89,9 +102,34 @@
   box-shadow: 4px 4px #ecc94b;
 }
 
+.form-select {
+  padding-inline: 0.5rem;
+  margin-top: 0.5rem;
+  width: 97%;
+  height: 45%;
+  background: #242424;
+  color: white;
+  border: 2px solid #ecc94b;
+  /* border-radius: 4px; */
+  font-size: 1rem;
+  /* outline: none; */
+  font-family: "Fira Code", sans-serif;
+}
+
+.form-select option:hover {
+  background-color: #ecc94b;
+  color: white;
+}
+
+.form-select:focus {
+  outline: none;
+  box-shadow: 4px 4px #ecc94b;
+}
+
 .form-submit {
   height: 45px;
   width: 25%;
+  min-width: 150px;
   font-size: 1rem;
   font-weight: 800;
   font-family: "Press Start 2P", Outfit, sans-serif;
@@ -188,5 +226,30 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .form-div {
+    margin-top: 10vh;
+    width: 75vw;
+  }
+  .title {
+    margin-block: 1rem;
+  }
+  .form-submit {
+    margin-top: 1rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .form-div {
+    width: 90vw;
+  }
+  .double-input-wrapper {
+    flex-direction: column;
+  }
+  .double-input-wrapper > .input-wrapper {
+    width: 100%;
   }
 }

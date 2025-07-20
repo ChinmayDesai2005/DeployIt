@@ -15,6 +15,7 @@ COPY script.js script.js
 COPY package*.json .
 COPY config.oci config.oci
 COPY *.pem .
+COPY .env .env
 
 RUN npm install
 

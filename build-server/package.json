@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "dotenv": "^17.2.0",
     "mime-types": "^3.0.1",
     "oci-common": "^2.106.2",
     "oci-objectstorage": "^2.106.2",

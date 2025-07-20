@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./NotFound.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 const NotFound = () => {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [redirectLink, setRedirectLink] = useState();
+
+  useEffect(() => {
+    if (searchParams.get("link")) {
+      setRedirectLink(
+        `https://${searchParams.get("link")}.deploy.chinmaydesai.site`
+      );
+    }
+  }, [searchParams]);
+
   return (
     <>
       <div className="not-found-wrapper">
@@ -26,6 +37,11 @@ const NotFound = () => {
             </ol>
           </div>
         </div>
+        {redirectLink && (
+          <div className="try-again-wrapper">
+            Try Again: <Link to={redirectLink}>{redirectLink}</Link>
+          </div>
+        )}
       </div>
       <div className="not-found-footer">
         <div className="deployit-title" onClick={() => navigate("/")}>
