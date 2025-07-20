@@ -4,6 +4,7 @@ const fs = require("fs");
 const os = require("oci-objectstorage");
 const common = require("oci-common");
 const mime = require("mime-types");
+require("dotenv").config({ quiet: true });
 
 const configurationFilePath = "./config.oci";
 const configProfile = "DEFAULT";

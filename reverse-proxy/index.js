@@ -1,6 +1,7 @@
 const express = require("express");
 const httpProxy = require("http-proxy");
 const axios = require("axios");
+require("dotenv").config({ quiet: true });
 
 const app = express();
 const PORT = 8000;
@@ -25,13 +26,13 @@ app.use(async (req, res) => {
       return proxy.web(req, res, { target: resolvesTo, changeOrigin: true });
     } else {
       return proxy.web(req, res, {
-        target: ERROR_PATH,
+        target: ERROR_PATH + `?link=${subdomain}`,
         changeOrigin: true,
       });
     }
   } catch (error) {
     // console.log(error);
-    res.redirect(ERROR_PATH);
+    res.redirect(ERROR_PATH + `?link=${hostname}`);
   }
 });
 

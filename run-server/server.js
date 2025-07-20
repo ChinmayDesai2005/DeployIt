@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const { spawn } = require("child_process");
 const { generateSlug } = require("random-word-slugs");
 const { ECSClient, RunTaskCommand } = require("@aws-sdk/client-ecs");
+require("dotenv").config({ quiet: true });
 
 // const execPromise = util.promisify(exec);
 const app = express();
@@ -19,7 +20,6 @@ const SECRETACCESSKEY = process.env.AWS_SECRET_ID;
 const AWS_ECS_CLUSTER = process.env.AWS_ECS_CLUSTER;
 const AWS_ECS_TASK = process.env.AWS_ECS_TASK;
 const MONGO_URI = process.env.MONGO_URI;
-console.log(process.env.MONGO_URI);
 
 mongoose
   .connect(MONGO_URI)
@@ -77,7 +77,7 @@ app.post("/checkURL", async (req, res) => {
 });
 
 app.post("/deploy", async (req, res) => {
-  const { gitURL, slug, customDir } = req.body;
+  const { gitURL, gitBranch, slug, customDir } = req.body;
   const projectSlug = slug ? slug : generateSlug();
 
   if (!gitURL) {
@@ -88,6 +88,7 @@ app.post("/deploy", async (req, res) => {
     customDir,
     gitURL,
     projectSlug: projectSlug,
+    gitBranch,
   });
 
   console.log("New Project created in DB", result);
@@ -115,6 +116,7 @@ app.post("/deploy", async (req, res) => {
           name: "build-image",
           environment: [
             { name: "GIT_REPOSITORY__URL", value: gitURL },
+            { name: "GIT_REPOSITORY_BRANCH", value: gitBranch },
             { name: "PROJECT_ID", value: projectSlug },
             { name: "CUSTOM_DIR", value: customDir },
           ],

@@ -2,6 +2,7 @@
   "dependencies": {
     "@aws-sdk/client-ecs": "^3.787.0",
     "cors": "^2.8.5",
+    "dotenv": "^17.2.0",
     "ecs": "^0.23.0",
     "express": "^5.1.0",
     "express.js": "^1.0.0",
