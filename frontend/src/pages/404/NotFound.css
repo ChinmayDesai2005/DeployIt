@@ -120,13 +120,13 @@
   text-align: center;
 }
 
-a,
-a:visited {
+.not-found-wrapper a,
+.not-found-wrapper a:visited {
   color: #ecc94b;
   transition: color 0.1s ease-in;
 }
 
-a:hover {
+.not-found-wrapper a:hover {
   color: white;
 }
 

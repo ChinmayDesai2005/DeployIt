@@ -9,9 +9,7 @@ const NotFound = () => {
 
   useEffect(() => {
     if (searchParams.get("link")) {
-      setRedirectLink(
-        `https://${searchParams.get("link")}.deploy.chinmaydesai.site`
-      );
+      setRedirectLink(`https://${searchParams.get("link")}`);
     }
   }, [searchParams]);
 
