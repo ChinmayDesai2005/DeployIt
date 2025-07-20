@@ -61,8 +61,7 @@ const NewProject = () => {
   const handleURLChange = async (url) => {
     try {
       const response = await axios.post(
-        // "https://chinmaydesai.site/deploy-it-api/checkURL",
-        "http://localhost:9000/checkURL",
+        "https://chinmaydesai.site/deploy-it-api/checkURL",
         {
           projectSlug: url,
         }
@@ -127,8 +126,7 @@ const NewProject = () => {
     }
     try {
       const response = await axios.post(
-        // "https://chinmaydesai.site/deploy-it-api/deploy",
-        "http://localhost:9000/deploy",
+        "https://chinmaydesai.site/deploy-it-api/deploy",
         {
           gitURL: gitUrl,
           customDir,
