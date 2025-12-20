@@ -8,7 +8,7 @@
 
 ### Deploy your Frontend Application at a snap.
 
-Try **DeployIt** out @ **[deployit.chinmaydesai.site](https://deployit.chinmaydesai.site)**
+Try **DeployIt** out @ **[deployit.chinmaydesai.xyz](https://deployit.chinmaydesai.xyz)**
 
 DeployIt is a frontend deployment service which builds your projects, stores them on the cloud, and deploys them on a publicly accessible domain. Currently supports vite-based projects.
 
